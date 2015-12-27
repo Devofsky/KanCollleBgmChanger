@@ -1,0 +1,2 @@
+# KanCollleBgmChanger
+場面に応じてBGMを再生するKanColleViewer用のプラグイン
