@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KanColleViewer.Controls</name>
+    </assembly>
+    <members>
+        <member name="T:Grabacr07.KanColleViewer.Controls.Globalization.ResourceService">
+            <summary>
+            多言語化されたリソースへのアクセスを提供します。
+            </summary>
+        </member>
+        <member name="F:Grabacr07.KanColleViewer.Controls.Globalization.ResourceService.supportedCultureNames">
+            <summary>
+            サポートされているカルチャの名前。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Controls.Globalization.ResourceService.Resources">
+            <summary>
+            多言語化されたリソースを取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Controls.Globalization.ResourceService.SupportedCultures">
+            <summary>
+            サポートされているカルチャを取得します。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.KanColleViewer.Controls.Globalization.ResourceService.ChangeCulture(System.String)">
+            <summary>
+            指定されたカルチャ名を使用して、リソースのカルチャを変更します。
+            </summary>
+            <param name="name">カルチャの名前。</param>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Controls.Globalization.Resources">
+            <summary>
+              ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Controls.Globalization.Resources.ResourceManager">
+            <summary>
+              このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Controls.Globalization.Resources.Culture">
+            <summary>
+              厳密に型指定されたこのリソース クラスを使用して、すべての検索リソースに対し、
+              現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Controls.Globalization.Resources.Quest_Detail_Untaken">
+            <summary>
+              任務画面の全ページにアクセスしてください。 に類似しているローカライズされた文字列を検索します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Controls.Globalization.Resources.Quest_Progress_50">
+            <summary>
+               50 %  に類似しているローカライズされた文字列を検索します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Controls.Globalization.Resources.Quest_Progress_80">
+            <summary>
+               80 %  に類似しているローカライズされた文字列を検索します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Controls.Globalization.Resources.Quest_State_Accomplished">
+            <summary>
+               完了  に類似しているローカライズされた文字列を検索します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Controls.Globalization.Resources.Quest_Title_Untaken">
+            <summary>
+              (未取得の任務) に類似しているローカライズされた文字列を検索します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Controls.BuildingDock">
+            <summary>
+            建造ドックを表示します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Controls.ColorIndicator">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Controls.ConditionIcon">
+            <summary>
+            艦娘のコンディションに対応した色を表示するアイコンを表します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Controls.ConditionIcon.ConditionType">
+            <summary>
+            艦娘のコンディションを取得または設定します。
+            </summary>
+        </member>
+        <member name="F:Grabacr07.KanColleViewer.Controls.ConditionIcon.ConditionTypeProperty">
+            <summary>
+            <see cref="P:Grabacr07.KanColleViewer.Controls.ConditionIcon.ConditionType"/> 依存関係プロパティを識別します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Controls.Modernizable">
+            <summary>
+            <see cref="T:Grabacr07.KanColleWrapper.Models.ModernizableStatus"/> の表示をサポートします。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Controls.SlotItemIcon">
+            <summary>
+            装備スロットの種類に基づいたアイコンを表示します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Interactivity.CountdownBehavior">
+            <summary>
+            指定した時間までのカウントダウン機能を有する <see cref="T:Grabacr07.KanColleViewer.Interactivity.TimerBehavior"/> です。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Interactivity.CountdownBehavior.Period">
+            <summary>
+            カウントダウンの終了時刻を取得または設定します。
+            </summary>
+        </member>
+        <member name="F:Grabacr07.KanColleViewer.Interactivity.CountdownBehavior.PeriodProperty">
+            <summary>
+            <see cref="P:Grabacr07.KanColleViewer.Interactivity.CountdownBehavior.Period"/> 依存関係プロパティを識別します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Interactivity.TimerBehavior">
+            <summary>
+            <see cref="T:System.Windows.Controls.TextBlock"/> にタイマー機能を付与します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Interactivity.TimerBehavior.Interval">
+            <summary>
+            タイマー刻みの間隔の時間を取得または設定します。
+            </summary>
+        </member>
+        <member name="F:Grabacr07.KanColleViewer.Interactivity.TimerBehavior.IntervalProperty">
+            <summary>
+            <see cref="P:Grabacr07.KanColleViewer.Interactivity.TimerBehavior.Interval"/> 依存関係プロパティを識別します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Interactivity.TimerBehavior.Proc">
+            <summary>
+            タイマーによって実行される処理を取得または設定します。
+            </summary>
+        </member>
+        <member name="F:Grabacr07.KanColleViewer.Interactivity.TimerBehavior.ProcProperty">
+            <summary>
+            <see cref="P:Grabacr07.KanColleViewer.Interactivity.TimerBehavior.Proc"/> 依存関係プロパティを識別します。
+            </summary>
+        </member>
+    </members>
+</doc>

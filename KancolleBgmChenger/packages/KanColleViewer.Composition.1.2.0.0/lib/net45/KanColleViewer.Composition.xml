@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>KanColleViewer.Composition</name>
+    </assembly>
+    <members>
+        <member name="T:Grabacr07.KanColleViewer.Composition.INotifier">
+            <summary>
+            通知機能を公開します。
+            このインターフェイスは、KanColleViewer プラグインのコントラクト型です。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Composition.INotification">
+            <summary>
+            ユーザーへの通知を表すメンバーを公開します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.INotification.Type">
+            <summary>
+            通知の種類を示す文字列を取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.INotification.Header">
+            <summary>
+            通知のヘッダーを取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.INotification.Body">
+            <summary>
+            通知の本文を取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.INotification.Activated">
+            <summary>
+            通知に対しユーザーが実行できるアクションを表すメソッドを取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.INotification.Failed">
+            <summary>
+            通知に失敗したとき、その失敗の原因を表す例外オブジェクトを受け取るメソッドを取得します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Composition.Notification.Types">
+            <summary>
+            通知の種類を示す静的メンバーを公開します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.Notification.Types.Test">
+            <summary>
+            テスト通知を識別するための文字列を取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.Notification.Types.BuildingCompleted">
+            <summary>
+            工廠で艦娘の建造が完了したことを示す通知を識別するための文字列を取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.Notification.Types.RepairingCompleted">
+            <summary>
+            艦娘の入渠が完了したことを示す通知を識別するための文字列を取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.Notification.Types.ExpeditionReturned">
+            <summary>
+            艦隊が遠征から帰投したことを示す通知を識別するための文字列を取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.Notification.Types.FleetRejuvenated">
+            <summary>
+            艦隊の疲労が回復したことを示す通知を識別するための文字列を取得します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Composition.IPlugin">
+            <summary>
+            KanColleViewer プラグインを表します。プラグインは、必ずこのコントラクト型をエクスポートしてください。
+            </summary>
+        </member>
+        <member name="M:Grabacr07.KanColleViewer.Composition.IPlugin.Initialize">
+            <summary>
+            プラグインの初期化処理を実行します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.IPluginGuid.Guid">
+            <summary>
+            プラグインを表す GUID を取得します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Composition.IPluginMetadata">
+            <summary>
+            KanColleViewer プラグインのメタデータを公開します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.IPluginMetadata.Title">
+            <summary>
+            プラグインのタイトルを取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.IPluginMetadata.Description">
+            <summary>
+            プラグインが提供する機能を簡潔に説明するテキストを取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.IPluginMetadata.Version">
+            <summary>
+            プラグインのバージョンを取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.IPluginMetadata.Author">
+            <summary>
+            プラグインの開発者を取得します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Composition.IRequestNotify">
+            <summary>
+            プラグイン側から本体に通知を要求するためのメンバーを公開します。
+            このインターフェイスは、KanColleViewer プラグインのコントラクト型です。
+            </summary>
+        </member>
+        <member name="E:Grabacr07.KanColleViewer.Composition.IRequestNotify.NotifyRequested">
+            <summary>
+            このプラグインが、本体に通知を要求したときに発生します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Composition.ISettings">
+            <summary>
+            プラグインの設定画面を呼び出すためのメンバーを公開します。
+            このインターフェイスは、KanColleViewer プラグインのコントラクト型です。
+            </summary>
+            <remarks>
+            この型をコントラクトとしてエクスポートするとき、1 つの GUID につき 1 つまでしか使用されないことに注意してください。
+            </remarks>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.ISettings.View">
+            <summary>
+            [設定] タブ内に表示されるプラグイン設定 UI のルート要素を取得します。
+            </summary>
+        </member>
+        <member name="T:Grabacr07.KanColleViewer.Composition.ITool">
+            <summary>
+            [ツール] タブに表示されるツールに必要なメンバーを公開します。
+            このインターフェイスは、KanColleViewer プラグインのコントラクト型です。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.ITool.Name">
+            <summary>
+            [ツール] タブのツール一覧に表示される名前を取得します。
+            </summary>
+        </member>
+        <member name="P:Grabacr07.KanColleViewer.Composition.ITool.View">
+            <summary>
+            [ツール] タブ内に表示される UI のルート要素を取得します。
+            </summary>
+        </member>
+    </members>
+</doc>
