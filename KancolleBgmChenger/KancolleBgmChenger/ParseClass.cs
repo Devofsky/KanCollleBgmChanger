@@ -12,6 +12,12 @@ namespace KancolleBgmChenger
         public string api_win_rank { get; set; }
     }
 
+    //作戦MAPのデータをパースする用のクラス
+    public class StrategyMap
+    {
+        public int api_color_no { get; set; }
+    }
+
     //デフォルトのクラス(何もパースしない)
     public class NullClass
     {
