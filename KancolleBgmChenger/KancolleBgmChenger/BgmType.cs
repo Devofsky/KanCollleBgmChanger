@@ -23,6 +23,8 @@ namespace KancolleBgmChenger
         TYPE_RESULT_E,
         TYPE_MIDNIGHT_BATTLE,
         TYPE_PRACTICE_MIDNIGHT_BATTLE,
+        TYPE_DAY_BOSS_BATTLE,
+        TYPE_MIDNIGHT_BOSS_BATTLE,
     }
 
 }
