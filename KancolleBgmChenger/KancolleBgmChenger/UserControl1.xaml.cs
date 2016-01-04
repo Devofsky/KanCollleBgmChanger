@@ -421,7 +421,7 @@ namespace KancolleBgmChenger
             ofd.Title = "ファイルを選択してください";
             ofd.FileName = "";
             ofd.DefaultExt = "*.mp3";
-            ofd.Filter = "mp3ファイル|*.mp3|m4aファイル|*.m4a";  // ファイルの種類
+            ofd.Filter = "音楽ファイル|*.mp3;*.m4a";  // ファイルの種類
             ofd.FilterIndex = 0;            // 上記フィルタのどれを初期表示するか(今回はゼロなのでTXTが初期表示される)
 
             ofd.RestoreDirectory = true;    // ダイアログボックスを閉じる前に、現在のディレクトリを復元する
