@@ -11,6 +11,9 @@ using Grabacr07.KanColleWrapper;
 using System.Timers;
 using Microsoft.Win32;
 
+#if DEBUG
+    using System.Threading;
+#endif
 
 
 namespace KancolleBgmChenger
@@ -48,7 +51,7 @@ namespace KancolleBgmChenger
         {
 #if DEBUG
             //プロセスにアタッチできるよう待機
-            //Thread.Sleep(10000);
+            Thread.Sleep(10000);
 #endif
             //------初期化------------------------------------
             UriCurrentBgm = null;
@@ -157,6 +160,13 @@ namespace KancolleBgmChenger
                                                                                                     bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MIDNIGHT_BOSS_BATTLE))
                                                                                                     }, ChengeBgm
                                                                                                     , strategyMapInfo)));
+            //夜戦(特殊夜戦)APIの登録
+            endPointPathList.Add(new EndPointPath(7, "/kcsapi/api_req_battle_midnight/sp_midnight", new AnalysisEndPointBattle(new List<Bgm> {
+                                                                                                    bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MIDNIGHT_BATTLE)),
+                                                                                                    bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MIDNIGHT_BOSS_BATTLE))
+                                                                                                    }, ChengeBgm
+                                                                                        , strategyMapInfo)));
+
             //夜戦(演習)APIの登録
             endPointPathList.Add(new EndPointPath(7, "/kcsapi/api_req_practice/midnight_battle", new AnalysisEndPointDefault(new List<Bgm> {
                                                                                                     bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_PRACTICE_MIDNIGHT_BATTLE)) 
@@ -171,7 +181,12 @@ namespace KancolleBgmChenger
         private bool saveBgmListToXml()
         {
             bool ret = false;
-            string fileName = PATH_BGM_LIST_XML;
+
+            //KanColleViewer.exeの存在するディレクトリと、設定ファイル名を結合
+            string filePath = System.IO.Path.Combine(
+                System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
+                PATH_BGM_LIST_XML);
+
 
             //保存用データ作成
             BgmSetting bgmSetting = new BgmSetting();
@@ -191,7 +206,7 @@ namespace KancolleBgmChenger
                 //オブジェクトの型を指定する
                 System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(BgmSetting));
                 //書き込むファイルを開く（UTF-8 BOM無し）
-                System.IO.StreamWriter sw = new System.IO.StreamWriter(fileName, false, new System.Text.UTF8Encoding(false));
+                System.IO.StreamWriter sw = new System.IO.StreamWriter(filePath, false, new System.Text.UTF8Encoding(false));
                 //シリアル化し、XMLファイルに保存する
                 serializer.Serialize(sw, bgmSetting);
                 //ファイルを閉じる
@@ -214,7 +229,12 @@ namespace KancolleBgmChenger
         public bool loadBgmListFromXml()
         {
             bool ret = false;
-            string fileName = PATH_BGM_LIST_XML;             //保存元のファイル名
+
+            //KanColleViewer.exeの存在するディレクトリと、設定ファイル名を結合
+            string filePath = System.IO.Path.Combine(
+                System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
+                PATH_BGM_LIST_XML);
+
 
             //読み込み用データ作成
             BgmSetting bgmSetting = new BgmSetting();
@@ -225,7 +245,7 @@ namespace KancolleBgmChenger
                 //XmlSerializerオブジェクトを作成
                 System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(BgmSetting));
                 //読み込むファイルを開く
-                System.IO.StreamReader sr = new System.IO.StreamReader(fileName, new System.Text.UTF8Encoding(false));
+                System.IO.StreamReader sr = new System.IO.StreamReader(filePath, new System.Text.UTF8Encoding(false));
                 //XMLファイルから読み込み、逆シリアル化する
                 bgmSetting = (BgmSetting)serializer.Deserialize(sr);
                 //ファイルを閉じる

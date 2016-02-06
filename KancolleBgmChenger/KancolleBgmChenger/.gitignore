@@ -1,0 +1,6 @@
+#管理対象外フォルダ
+bin/
+obj/
+
+#例外ファイル
+!KancolleBgmChenger.dll
