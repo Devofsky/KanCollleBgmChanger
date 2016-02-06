@@ -157,6 +157,13 @@ namespace KancolleBgmChenger
                                                                                                     bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MIDNIGHT_BOSS_BATTLE))
                                                                                                     }, ChengeBgm
                                                                                                     , strategyMapInfo)));
+            //夜戦(特殊夜戦)APIの登録
+            endPointPathList.Add(new EndPointPath(7, "/kcsapi/api_req_battle_midnight/sp_midnight", new AnalysisEndPointBattle(new List<Bgm> {
+                                                                                                    bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MIDNIGHT_BATTLE)),
+                                                                                                    bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MIDNIGHT_BOSS_BATTLE))
+                                                                                                    }, ChengeBgm
+                                                                                        , strategyMapInfo)));
+
             //夜戦(演習)APIの登録
             endPointPathList.Add(new EndPointPath(7, "/kcsapi/api_req_practice/midnight_battle", new AnalysisEndPointDefault(new List<Bgm> {
                                                                                                     bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_PRACTICE_MIDNIGHT_BATTLE)) 
