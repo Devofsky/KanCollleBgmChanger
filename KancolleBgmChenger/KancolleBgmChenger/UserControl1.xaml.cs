@@ -201,9 +201,6 @@ namespace KancolleBgmChenger
                 System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location),
                 PATH_BGM_LIST_XML);
 
-
-            //保存用データ作成
-            m_bgmSetting.BgmPlayLists[comboBoxBgmList.SelectedIndex].Bgms = m_bgmList;
             if (checkBoxMute.HasContent)
             {//nullじゃなかったらboolでキャスト
                 m_bgmSetting.isMuteAtLaunch = (bool)checkBoxMute.IsChecked;
