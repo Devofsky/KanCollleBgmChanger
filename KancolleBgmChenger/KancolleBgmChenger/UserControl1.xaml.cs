@@ -33,6 +33,7 @@ namespace KancolleBgmChenger
 
         private List<Bgm> m_bgmList = null;                              //BGMリスト
         private List<Bgm> m_defaultBgmList = null;                       //BGMリスト(デフォルト)設定読み込みに失敗したときや、デフォルトのリストの復元に使用
+        private List<Bgm> m_cpyPstBuffbgmList = null;                    //BGMリスト(コピー&ペースト用のバッファ)
         private List<EndPointPath> m_endPointPathList;                     //APIリスト
         private BgmSetting m_bgmSetting = null;
 
@@ -61,6 +62,7 @@ namespace KancolleBgmChenger
             //------インスタンスの作成-------------------------
             m_bgmList = new List<Bgm>();
             m_defaultBgmList = new List<Bgm>(); 
+            m_cpyPstBuffbgmList = new List<Bgm>();
             m_player = new MediaPlayer();
             m_endPointPathList = new List<EndPointPath>();
             m_bgmSetting = new BgmSetting(NUM_PLAYLIST);
@@ -82,6 +84,8 @@ namespace KancolleBgmChenger
             //デフォルトBGMリストを読み込み
             loadDefaultBgmList();
 
+            //コピー&ペースト用のBMGリストのインスタンス作成
+            createCpyPstBgmList();
             //Bgmドロップダウンリストの初期化
             for (uint x = 0; x < NUM_PLAYLIST;x++)
             {
@@ -357,8 +361,6 @@ namespace KancolleBgmChenger
                         Bgm.Copy(m_bgmList[i], m_defaultBgmList[i]);
                         //BGMリスト構造体にもインスタンスを作っておく(参照渡しではない)
                         m_bgmSetting.BgmPlayLists[comboBoxBgmList.SelectedIndex].Bgms.Add(new Bgm(m_defaultBgmList[i]));
-                        //参照先のURIの更新
-                        m_bgmList[i].refreshUri();
                     }
                 }
                 else
@@ -378,8 +380,6 @@ namespace KancolleBgmChenger
                             //BGMリストの参照先の値を、見つかったBGMのものに変えておく
                             Bgm.Copy(m_bgmList[i], bgm);
                         }
-                        //参照先のURIの更新
-                        m_bgmList[i].refreshUri();
                     }
                 }
                 //ListViewの表示更新
@@ -407,14 +407,21 @@ namespace KancolleBgmChenger
                     m_bgmList.Add(new Bgm(bgm));
                 }
             }
-
-            foreach (Bgm bgm in m_bgmList)
-            {//現行のBGMリストについて
-                //URIの更新
-                bgm.refreshUri();
-            }        
         }
-
+        /// <summary>
+        /// BGMリスト(コピー&ペースト用)のインスタンスを作成する
+        /// </summary>
+        private void createCpyPstBgmList()
+        {
+            foreach (Bgm bgm in m_defaultBgmList)
+            {//デフォルトBGMセットから検索
+                if (m_cpyPstBuffbgmList.Find(x => x.ID.Equals(bgm.ID)) == null)
+                {//もし、デフォルトBGMセットのうち、ロードしたBGMセットに含まれていないものがあった場合
+                    //現行のBGMリストに追加しておく。
+                    m_cpyPstBuffbgmList.Add(new Bgm(bgm));
+                }
+            }
+        }
 
         /// <summary>
         /// デフォルトのBGMリストを読み込む
@@ -761,6 +768,42 @@ namespace KancolleBgmChenger
         private void comboBoxBgmList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             loadBgmListFromBgmSetting();
+        }
+
+        private void buttonCopy_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //現行のBGMリストを選んでBGMリスト(バッファ)にコピー
+                for (int i = 0; i < m_bgmList.Count; i++)
+                {
+                    Bgm.Copy(m_cpyPstBuffbgmList[i], m_bgmList[i]);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void buttonPaste_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //BGMリスト(バッファ)からBGMリスト構造体の選択中のBGMリストにコピー
+                for (int i = 0; i < m_bgmList.Count; i++)
+                {
+                    Bgm.Copy(m_bgmSetting.BgmPlayLists[comboBoxBgmList.SelectedIndex].Bgms[i],m_cpyPstBuffbgmList[i]);
+                }
+                //BGMリスト構造体を読み込む
+                loadBgmListFromBgmSetting();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+
+
         }
 
     }
