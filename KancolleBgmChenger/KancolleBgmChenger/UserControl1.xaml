@@ -11,9 +11,9 @@
             <RowDefinition Height="64*"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="textbox1" HorizontalAlignment="Left" Height="22" Margin="10,10,0,0" TextWrapping="Wrap" Text="BGMリスト" VerticalAlignment="Top" Width="120"  SpellCheck.IsEnabled="True" AllowDrop="False" Focusable="False" IsTabStop="False" Background="{x:Null}" BorderBrush="{x:Null}" TextDecorations="{x:Null}" Foreground="White"/>
-        <Button Content="Play" HorizontalAlignment="Left" Height="22" Margin="439,217,0,0" VerticalAlignment="Top" Width="54" Click="ButtonPlay_Click"/>
-        <Button Content="Stop" HorizontalAlignment="Left" Margin="439,244,0,0" VerticalAlignment="Top" Width="54" Click="ButtonStop_Click" Height="22"/>
-        <ListView x:Name="listViewBgm" HorizontalAlignment="Left" Height="253" Margin="10,32,0,0" VerticalAlignment="Top" Width="413" BorderBrush="Black" Foreground="White" Background="Black" FontWeight="Bold"  MouseDoubleClick="listView_MouseDoubleClick">
+        <Button Content="Play" HorizontalAlignment="Left" Height="22" Margin="440,283,0,0" VerticalAlignment="Top" Width="54" Click="ButtonPlay_Click"/>
+        <Button Content="Stop" HorizontalAlignment="Left" Margin="440,3,0,0" VerticalAlignment="Top" Width="54" Click="ButtonStop_Click" Height="22" Grid.Row="1"/>
+        <ListView x:Name="listViewBgm" HorizontalAlignment="Left" Height="320" Margin="10,32,0,0" VerticalAlignment="Top" Width="425" BorderBrush="Black" Foreground="White" Background="Black" FontWeight="Bold"  MouseDoubleClick="listView_MouseDoubleClick" Grid.RowSpan="2">
             <ListView.View >
                 <GridView>
                     <GridViewColumn Header="Schene" DisplayMemberBinding="{Binding [0]}" Width="100"/>
@@ -22,9 +22,9 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="buttonSaveBgmSettiing" Content="Save" HorizontalAlignment="Left" Margin="439,162,0,0" VerticalAlignment="Top" Width="54" Click="buttonSaveBgmSettiing_Click" Height="22"/>
-        <CheckBox x:Name="checkBoxMute" Content="Mute" HorizontalAlignment="Left" Margin="439,270,0,0" VerticalAlignment="Top" Width="71" Checked="checkBoxMute_Checked" Unchecked="checkBoxMute_UnChecked"/>
-        <ComboBox x:Name="comboBoxBgmList" HorizontalAlignment="Left" Margin="439,135,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxBgmList_SelectionChanged"/>
+        <Button x:Name="buttonSaveBgmSettiing" Content="Save" HorizontalAlignment="Left" Margin="440,248,0,0" VerticalAlignment="Top" Width="54" Click="buttonSaveBgmSettiing_Click" Height="22"/>
+        <CheckBox x:Name="checkBoxMute" Content="Mute" HorizontalAlignment="Left" Margin="440,30,0,0" VerticalAlignment="Top" Width="71" Checked="checkBoxMute_Checked" Unchecked="checkBoxMute_UnChecked" Grid.Row="1"/>
+        <ComboBox x:Name="comboBoxBgmList" HorizontalAlignment="Left" Margin="440,221,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="comboBoxBgmList_SelectionChanged"/>
 
     </Grid>
 </UserControl>
