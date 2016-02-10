@@ -5,14 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Margin="0,0,-369,-71" Height="371" VerticalAlignment="Top" HorizontalAlignment="Left" Width="669">
+    <Grid Margin="0,0,-369,-71" Height="371" VerticalAlignment="Top" HorizontalAlignment="Left" Width="669" >
         <Grid.RowDefinitions>
             <RowDefinition Height="307*"/>
             <RowDefinition Height="64*"/>
         </Grid.RowDefinitions>
         <TextBox x:Name="textbox1" HorizontalAlignment="Left" Height="22" Margin="10,10,0,0" TextWrapping="Wrap" Text="BGMリスト" VerticalAlignment="Top" Width="120"  SpellCheck.IsEnabled="True" AllowDrop="False" Focusable="False" IsTabStop="False" Background="{x:Null}" BorderBrush="{x:Null}" TextDecorations="{x:Null}" Foreground="White"/>
-        <Button Content="Play" HorizontalAlignment="Left" Height="22" Margin="440,283,0,0" VerticalAlignment="Top" Width="54" Click="ButtonPlay_Click"/>
-        <Button Content="Stop" HorizontalAlignment="Left" Margin="440,3,0,0" VerticalAlignment="Top" Width="54" Click="ButtonStop_Click" Height="22" Grid.Row="1"/>
         <ListView x:Name="listViewBgm" HorizontalAlignment="Left" Height="320" Margin="10,32,0,0" VerticalAlignment="Top" Width="425" BorderBrush="Black" Foreground="White" Background="Black" FontWeight="Bold"  MouseDoubleClick="listView_MouseDoubleClick" Grid.RowSpan="2">
             <ListView.View >
                 <GridView>
@@ -23,10 +21,14 @@
             </ListView.View>
         </ListView>
         <Button x:Name="buttonSaveBgmSettiing" Content="Save" HorizontalAlignment="Left" Margin="440,220,0,0" VerticalAlignment="Top" Width="54" Click="buttonSaveBgmSettiing_Click" Height="22"/>
-        <CheckBox x:Name="checkBoxMute" Content="Mute" HorizontalAlignment="Left" Margin="440,30,0,0" VerticalAlignment="Top" Width="71" Checked="checkBoxMute_Checked" Unchecked="checkBoxMute_UnChecked" Grid.Row="1"/>
+        <CheckBox x:Name="checkBoxMute" Content="Mute" HorizontalAlignment="Left" Margin="445,30,0,0" VerticalAlignment="Top" Width="71" Checked="checkBoxMute_Checked" Unchecked="checkBoxMute_UnChecked" Grid.Row="1"/>
         <ComboBox x:Name="comboBoxBgmList" HorizontalAlignment="Left" Margin="440,193,0,0" VerticalAlignment="Top" Width="113" SelectionChanged="comboBoxBgmList_SelectionChanged"/>
         <Button x:Name="buttonCopy" Content="Copy" HorizontalAlignment="Left" Margin="499,220,0,0" VerticalAlignment="Top" Width="54" Height="22" Click="buttonCopy_Click"/>
         <Button x:Name="buttonPaste" Content="Paste" HorizontalAlignment="Left" Margin="499,247,0,0" VerticalAlignment="Top" Width="54" Height="22" Click="buttonPaste_Click"/>
-
+        <Slider x:Name="sliderVolume" HorizontalAlignment="Left" Margin="440,6,0,0" VerticalAlignment="Top" Width="113" 
+                Minimum="0" Maximum="100" SmallChange="1" LargeChange="10" Value="50" TickPlacement="BottomRight"
+                TickFrequency="10" AutoToolTipPlacement="TopLeft" IsSnapToTickEnabled="True" ValueChanged="sliderVolume_ValueChanged" Grid.Row="1"
+                />
+        <TextBlock HorizontalAlignment="Left" Margin="445,291,0,0" TextWrapping="Wrap" Text="Volume" VerticalAlignment="Top"/>
     </Grid>
 </UserControl>
