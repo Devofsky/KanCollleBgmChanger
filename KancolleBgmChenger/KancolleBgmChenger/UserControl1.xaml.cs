@@ -37,7 +37,7 @@ namespace KancolleBgmChenger
         private List<EndPointPath> m_endPointPathList;                     //APIリスト
         private BgmSetting m_bgmSetting = null;
 
-
+        private bool m_isBgMFaiding = false;                            //音量変更のクリティカルセクション用
         //--------定数-----------------------------
         const uint TIME_BGM_CHANGE_IMMEDIATELY = 50;
         const uint TIME_BGM_CHANGE_NORMAL = 2000;
@@ -256,6 +256,9 @@ namespace KancolleBgmChenger
                 m_bgmSetting.isMuteAtLaunch = false;            
             }
 
+            //音量の保存
+            m_bgmSetting.volume = sliderVolume.Value / 100;//スライダーの値(0-100) 音量の値(0-1)
+
             try
             {
                 //XmlSerializerオブジェクトを作成
@@ -306,7 +309,10 @@ namespace KancolleBgmChenger
                 {
                     //起動時のMuteチェックボックスの状態を設定
                     setMuteCheckBox(m_bgmSetting.isMuteAtLaunch);
-
+                    //音量設定
+                    defaultVolume = m_bgmSetting.volume;
+                    sliderVolume.Value = defaultVolume * 100; //スライダーの値(0-100) 音量の値(0-1)
+ 
                     ret = true;
                 }
                 else
@@ -476,6 +482,8 @@ namespace KancolleBgmChenger
         {
             if (m_player.Volume >= 0.05)
             {
+                //フェードアウト開始。クリティカルセクション
+                m_isBgMFaiding = true;
                 m_player.Volume = m_player.Volume - 0.05;
             }
             else
@@ -483,7 +491,8 @@ namespace KancolleBgmChenger
                 m_player.Stop();
                 m_player.Volume = defaultVolume;
                 m_timerFadeOut.Enabled = false;
-
+                //クリティカルセクション終了
+                m_isBgMFaiding = false;
             }
         }
         /// <summary>
@@ -493,6 +502,7 @@ namespace KancolleBgmChenger
         {
             m_player.Close();
             m_player.Open(UriCurrentBgm);
+            m_player.Volume = defaultVolume;
 
             if (checkBoxMute.HasContent && (bool)checkBoxMute.IsChecked)
             {//Muteにチェック入っていたら再生しない
@@ -516,23 +526,6 @@ namespace KancolleBgmChenger
         private void onTimedEventPlayBgm(Object source, System.Timers.ElapsedEventArgs e)
         {
             this.Dispatcher.BeginInvoke(new Action(() => { playBgm(); }));
-        }
-
-        /// <summary>
-        /// BGM再生ボタン
-        /// </summary>
-        private void ButtonPlay_Click(object sender, RoutedEventArgs e)
-        {
-            m_player.Volume = defaultVolume;
-            m_player.Play();
-        }
-
-        /// <summary>
-        /// BGM停止ボタン
-        /// </summary>
-        private void ButtonStop_Click(object sender, RoutedEventArgs e)
-        {
-            m_player.Stop();
         }
 
         /// <summary>
@@ -646,9 +639,7 @@ namespace KancolleBgmChenger
         /// </summary>
         private void checkBoxMute_Checked(object sender, RoutedEventArgs e)
         {
-            //ボリュームをMUTEにする。
-            defaultVolume = VALUE_BGM_VOLUME_MUTE;
-            //BGMも停止
+            //BGMを停止
             m_player.Stop();
         }
 
@@ -657,11 +648,8 @@ namespace KancolleBgmChenger
         /// </summary>
         private void checkBoxMute_UnChecked(object sender, RoutedEventArgs e)
         {
-            //ボリュームを通常にする。
-            defaultVolume = VALUE_BGM_VOLUME_DEFAULT;
             //BGMも開始
             m_player.Play();
-
         }
 
         /// <summary>
@@ -748,6 +736,9 @@ namespace KancolleBgmChenger
             [System.Xml.Serialization.XmlElement("isMuteAtLaunch")]
             public bool isMuteAtLaunch;
 
+            [System.Xml.Serialization.XmlElement("Volume")]
+            public double volume;
+
             public BgmSetting()
             {
                 BgmPlayLists = new List<BgmPlayList>();
@@ -804,6 +795,21 @@ namespace KancolleBgmChenger
             }
 
 
+        }
+
+        private void sliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            //基準音量を変更
+            defaultVolume = sliderVolume.Value / 100;//スライダーの値(0-100) 音量の値(0-1)
+ 
+            if(m_isBgMFaiding)
+            {   //フェードアウト中は、直接音量を変更しない。(フェードアウト終了して次にBGM流れるときに変更される)
+            }
+            else
+            {   //それ以外は、直接プレイヤーの音量を変更する
+                m_player.Volume = defaultVolume;
+
+            }
         }
 
     }
