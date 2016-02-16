@@ -141,6 +141,19 @@ namespace KancolleBgmChenger
                                                                                                     m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_DAY_BOSS_BATTLE))
                                                                                                     }, ChengeBgm
                                                                                                     , strategyMapInfo)));
+            //昼戦API(航空戦)の登録
+            m_endPointPathList.Add(new EndPointPath(14, "/kcsapi/api_req_sortie/airbattle", new AnalysisEndPointBattle(new List<Bgm> {
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_DAY_BATTLE)),
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_DAY_BOSS_BATTLE))
+                                                                                                    }, ChengeBgm
+                                                                                        , strategyMapInfo)));
+            //昼戦API(長距離空襲戦)の登録
+            m_endPointPathList.Add(new EndPointPath(15, "/kcsapi/api_req_sortie/ld_airbattle", new AnalysisEndPointBattle(new List<Bgm> {
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_DAY_BATTLE)),
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_DAY_BOSS_BATTLE))
+                                                                                                    }, ChengeBgm
+                                                                                        , strategyMapInfo)));
+
             //昼戦API(連合艦隊)の登録
             m_endPointPathList.Add(new EndPointPath(8, "/kcsapi/api_req_combined_battle/airbattle", new AnalysisEndPointBattle(new List<Bgm> {
                                                                                                     m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_DAY_BATTLE)),
@@ -159,6 +172,13 @@ namespace KancolleBgmChenger
                                                                                                     m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_DAY_BOSS_BATTLE))
                                                                                                     }, ChengeBgm
                                                                                         , strategyMapInfo)));
+
+            m_endPointPathList.Add(new EndPointPath(16, "/kcsapi/api_req_combined_battle/ld_airbattle", new AnalysisEndPointBattle(new List<Bgm> {
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_DAY_BATTLE)),
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_DAY_BOSS_BATTLE))
+                                                                                                    }, ChengeBgm
+                                                                                        , strategyMapInfo)));
+
 
             //演習APIの登録
             m_endPointPathList.Add(new EndPointPath(2, "/kcsapi/api_req_practice/battle", new AnalysisEndPointDefault(new List<Bgm> { 
