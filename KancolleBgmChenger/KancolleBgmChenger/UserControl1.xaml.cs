@@ -520,7 +520,10 @@ namespace KancolleBgmChenger
         /// </summary>
         private void playBgm()
         {
-            m_player.Close();
+            //D160216VolumeMixerFix
+            //MediaPlayerクラスをCloseすると、中でMediaStateクラスのInitが呼ばれて、リソースが初期化されてしまう。
+            //再度Openすると、音量ミキサ(アプリ)ではなく、音量ミキサ(規定のデバイス)を取得するので、コメントアウト
+            //m_player.Close();
             m_player.Open(UriCurrentBgm);
             m_player.Volume = defaultVolume;
 
