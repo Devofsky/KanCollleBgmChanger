@@ -11,7 +11,7 @@ namespace KancolleBgmChenger
     [ExportMetadata("Guid", "55F1599E-5FAD-4696-A972-BF8C4B3C1B79")]
     [ExportMetadata("Title", "BgmChanger")]
     [ExportMetadata("Description", "艦これのBGMを変更します。")]
-    [ExportMetadata("Version", "0.1.1")]
+    [ExportMetadata("Version", "0.2.1")]
     [ExportMetadata("Author", "@Devofsky")]
     public class Plugin : IPlugin,IDisposable, ITool
     {
