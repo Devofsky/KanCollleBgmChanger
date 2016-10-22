@@ -58,8 +58,21 @@ namespace KancolleBgmChenger
 
         public void Exec(object x)
         {
+
+            //時刻情報の確認
+            TimePeriodJudge.TimePeriod time_period = TimePeriodJudge.GetTimePeriod();
+            Bgm bgm = m_bgmList.Find(t => t.Key.Equals(time_period.ToString("G")));
+            if (bgm == null)
+            {
+                //指定の時間帯が見つからない場合、最初に登録されたBGMにする
+                bgm = m_bgmList[0];
+            }
+            else
+            {
+                // do nothing
+            }
             //BGM変更    
-            callBack(m_bgmList[0]);
+            callBack(bgm);
         }
 
         override public void Regist(KanColleProxy Proxy, string event_path)
@@ -131,8 +144,23 @@ namespace KancolleBgmChenger
         {
             //次に進む地点の情報を登録
             strategyMapInfo.PointType = api_color_no;
+
+            //時刻情報の確認
+            TimePeriodJudge.TimePeriod time_period = TimePeriodJudge.GetTimePeriod();
+            Bgm bgm = m_bgmList.Find(t => t.Key.Equals(time_period.ToString("G")));
+            if (bgm == null)
+            {
+                //指定の時間帯が見つからない場合、最初に登録されたBGMにする
+                //作戦MAPでは朝と夕方を登録しないので、一番目にAnalysisEndPointStrategytMapに登録した昼が選択される
+                bgm = m_bgmList[0];
+            }
+            else
+            {
+                // do nothing
+            }
+
             //BGM変更    
-            callBack(m_bgmList[0]);
+            callBack(bgm);
         }
 
 

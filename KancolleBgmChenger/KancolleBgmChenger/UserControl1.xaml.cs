@@ -132,8 +132,11 @@ namespace KancolleBgmChenger
             StrategyMapInfo strategyMapInfo = new StrategyMapInfo();
 
             //母港APIの登録
-            m_endPointPathList.Add(new EndPointPath(0, "/kcsapi/api_port/port", new AnalysisEndPointDefault(new List<Bgm> { 
-                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MOTHER_BASE))
+            m_endPointPathList.Add(new EndPointPath(0, "/kcsapi/api_port/port", new AnalysisEndPointDefault(new List<Bgm> {
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MOTHER_BASE_MORNING)),
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MOTHER_BASE_DAYTIME)),
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MOTHER_BASE_EVENING)),
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MOTHER_BASE_NIGHT))
                                                                                                     }, ChengeBgm)));
             //昼戦APIの登録
             m_endPointPathList.Add(new EndPointPath(1, "/kcsapi/api_req_sortie/battle", new AnalysisEndPointBattle(new List<Bgm> {
@@ -186,11 +189,13 @@ namespace KancolleBgmChenger
                                                                                                     }, ChengeBgm)));
             //作戦MAPAPIの登録
             m_endPointPathList.Add(new EndPointPath(3, "/kcsapi/api_req_map/start", new AnalysisEndPointStrategytMap(new List<Bgm> {
-                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MAP))
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MAP_DAYTIME)),
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MAP_NIGHT))
                                                                                                     }, ChengeBgm
                                                                                                     , strategyMapInfo)));
             m_endPointPathList.Add(new EndPointPath(4, "/kcsapi/api_req_map/next", new AnalysisEndPointStrategytMap(new List<Bgm> {
-                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MAP)) 
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MAP_DAYTIME)),
+                                                                                                    m_bgmList.Find(x => x.ID.Equals((uint)Bgmtype.TYPE_MAP_NIGHT))
                                                                                                     }, ChengeBgm
                                                                                                     , strategyMapInfo)));
             //戦果API(通常戦闘)の登録
@@ -454,12 +459,16 @@ namespace KancolleBgmChenger
         /// </summary>
         private void loadDefaultBgmList()
         {
-            m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_MOTHER_BASE, "母港", "", "", TIME_BGM_CHANGE_NORMAL));
+            m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_MOTHER_BASE_MORNING, "母港(朝)", "", TimePeriodJudge.TimePeriod.TIME_PERIOD_MORNING.ToString("G"), TIME_BGM_CHANGE_NORMAL));
+            m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_MOTHER_BASE_DAYTIME, "母港(昼)", "", TimePeriodJudge.TimePeriod.TIME_PERIOD_DAYTIME.ToString("G"), TIME_BGM_CHANGE_NORMAL));
+            m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_MOTHER_BASE_EVENING, "母港(夕方)", "", TimePeriodJudge.TimePeriod.TIME_PERIOD_EVENING.ToString("G"), TIME_BGM_CHANGE_NORMAL));
+            m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_MOTHER_BASE_NIGHT, "母港(夜)", "", TimePeriodJudge.TimePeriod.TIME_PERIOD_NIGHT.ToString("G"), TIME_BGM_CHANGE_NORMAL));
             m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_DAY_BATTLE, "昼戦", "", "", TIME_BGM_CHANGE_NORMAL));
             m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_MIDNIGHT_BATTLE, "夜戦", "", "", TIME_BGM_CHANGE_NORMAL));
             m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_DAY_BOSS_BATTLE, "昼戦(ボス戦)", "", MapPointType.POINT_TYPE_BOSS_BATTLE.ToString(), TIME_BGM_CHANGE_NORMAL));
             m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_MIDNIGHT_BOSS_BATTLE, "夜戦(ボス戦)", "", MapPointType.POINT_TYPE_BOSS_BATTLE.ToString(), TIME_BGM_CHANGE_NORMAL));
-            m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_MAP, "作戦MAP", "", "", TIME_BGM_CHANGE_NORMAL));
+            m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_MAP_DAYTIME, "作戦MAP(昼)", "", TimePeriodJudge.TimePeriod.TIME_PERIOD_DAYTIME.ToString("G"), TIME_BGM_CHANGE_NORMAL));
+            m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_MAP_NIGHT, "作戦MAP(夜)", "", TimePeriodJudge.TimePeriod.TIME_PERIOD_NIGHT.ToString("G"), TIME_BGM_CHANGE_NORMAL));
             m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_PRACTICE_DAY_BATTLE, "演習", "", "", TIME_BGM_CHANGE_NORMAL));
             m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_PRACTICE_MIDNIGHT_BATTLE, "演習(夜戦)", "", "", TIME_BGM_CHANGE_NORMAL));
             m_defaultBgmList.Add(new Bgm((uint)Bgmtype.TYPE_RESULT_S, "戦果S", "", "S", TIME_BGM_CHANGE_RESULT));
